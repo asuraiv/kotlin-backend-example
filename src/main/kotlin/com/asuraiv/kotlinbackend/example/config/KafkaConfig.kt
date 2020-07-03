@@ -17,7 +17,7 @@ import java.util.*
 @Configuration
 class KafkaConfig {
 
-    @Value("\${bis.kafka.hosts}")
+    @Value("\${kafka.hosts}")
     lateinit var hosts: String
 
     @Primary
@@ -51,7 +51,7 @@ class KafkaConfig {
                 ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG to "true",
                 ConsumerConfig.AUTO_OFFSET_RESET_CONFIG to "latest",
                 ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG to StringDeserializer::class.java,
-                ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG to ByteArrayDeserializer::class.java
+                ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG to StringDeserializer::class.java
         )
     }
 }

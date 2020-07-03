@@ -2,11 +2,7 @@ buildscript {
 
     ext {
         kotlinVersion = '1.3.72'
-        kotlinJpaPluginVersion = ''
         springBootVersion = '2.0.9.RELEASE'
-
-        protoVersion= '3.4.0'
-        protobufGradlePluginVersion = "0.8.5"
     }
 
     repositories {
@@ -19,14 +15,11 @@ buildscript {
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}")
         classpath("org.jetbrains.kotlin:kotlin-allopen:${kotlinVersion}")
         classpath("org.jetbrains.kotlin:kotlin-noarg:${kotlinVersion}")
-
-        classpath("com.google.protobuf:protobuf-gradle-plugin:${protobufGradlePluginVersion}")
     }
 }
 
 apply plugin: 'kotlin'
 apply plugin: 'kotlin-spring'
-apply plugin: 'kotlin-jpa'
 
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
@@ -42,7 +35,7 @@ repositories {
 
 dependencies {
 
-    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.kafka:spring-kafka'
 
     // TODO: 추후 데이터 베이스 연동 필요시 주석 해제
