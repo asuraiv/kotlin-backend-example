@@ -40,7 +40,7 @@ class KafkaConfig {
     @Bean
     fun consumerProperties(): Map<String, Any> {
         val hostName = try {
-            InetAddress.getLocalHost().hostName + UUID.randomUUID().toString()
+            InetAddress.getLocalHost().hostName
         } catch (e: UnknownHostException) {
             UUID.randomUUID().toString()
         }
