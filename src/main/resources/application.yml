@@ -1,2 +1,20 @@
+spring:
+  datasource:
+    sample:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      jdbc-url: jdbc:mysql://localhost:3306/example?useUnicode=yes&characterEncoding=UTF-8&connectTimeout=2000&autoReconnect=true&serverTimezone=Asia/Seoul&useSSL=false
+      username: root
+      password:
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    properties:
+      hibernate:
+        show_sql: false
+        format_sql: false
+    hibernate:
+      naming:
+        # MySQL physical 테이블의 필드 이름이 camel case 인 경우. 해당 이름에 맞게 매핑 (기본적으로 '_' 컨벤션으로 변환하여 매핑시켜주므로)
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
 kafka:
   hosts: localhost:9092
