@@ -22,6 +22,9 @@ class SampleTopicListener : ConsumerSeekAware {
     override fun onIdleContainer(assignments: MutableMap<TopicPartition, Long>?, callback: ConsumerSeekAware.ConsumerSeekCallback?) {
     }
 
+    /**
+     * Consumer가 구동되면, 가장 마지막 offset의 메시지를 가져온다.
+     */
     override fun onPartitionsAssigned(assignments: MutableMap<TopicPartition, Long>, callback: ConsumerSeekAware.ConsumerSeekCallback) {
 
         assignments.forEach { (topic, _) ->

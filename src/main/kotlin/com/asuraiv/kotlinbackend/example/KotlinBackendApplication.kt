@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.kafka.KafkaAutoConfiguration
 import org.springframework.boot.runApplication
 import org.springframework.kafka.annotation.EnableKafka
 
-@EnableKafka
+//@EnableKafka
 @SpringBootApplication(exclude = [KafkaAutoConfiguration::class])
 class KotlinBackendApplication
 

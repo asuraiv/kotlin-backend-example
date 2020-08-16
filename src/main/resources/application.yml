@@ -1,3 +1,5 @@
+
+
 spring:
   datasource:
     sample:
@@ -19,12 +21,18 @@ spring:
 kafka:
   hosts: localhost:9092
 
+security:
+  oauth2:
+    resource:
+      filter-order: 3
 
 oauth:
   client: kotlin-backend-app
   secret: abc123!@#
   grant-types: password,refresh_token
   authorities: ROLE_USER
-  scopes: read
+  scopes: read,write
   access-token-validity-seconds: 300 # 5 min
   refresh-token-validity-seconds: 600 # 10 min
+server:
+  port: 9000

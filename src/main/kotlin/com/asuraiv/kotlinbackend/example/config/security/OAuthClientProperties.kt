@@ -6,12 +6,13 @@ import org.springframework.stereotype.Component
 @Component
 @ConfigurationProperties(prefix = "oauth")
 class OAuthClientProperties(
-    val client: String,
-    val secret: String,
-    val grantTypes: String,
-    val authorities: String,
-    val scopes: String,
 
-    val accessTokenValiditySeconds: Int,
-    val refreshTokenValiditySeconds: Int
+    var client: String = "",
+    var secret: String = "",
+    var grantTypes: String = "",
+    var authorities: String = "",
+    var scopes: String = "",
+
+    var accessTokenValiditySeconds: Int = 0,
+    var refreshTokenValiditySeconds: Int = 0
 )
