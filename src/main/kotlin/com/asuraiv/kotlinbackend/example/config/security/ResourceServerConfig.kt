@@ -3,6 +3,7 @@ package com.asuraiv.kotlinbackend.example.config.security
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Primary
+import org.springframework.core.annotation.Order
 import org.springframework.http.HttpMethod
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
@@ -24,13 +25,16 @@ class ResourceServerConfig(
         http
             .csrf().disable()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST,"/oauth/**")
+                .antMatchers("/oauth/**")
+                .permitAll()
+            .and()
+                .authorizeRequests()
+                .antMatchers(HttpMethod.POST,"/users")
                 .permitAll()
             .and()
                 .authorizeRequests()
                 .anyRequest()
                 .authenticated()
-            .and()
     }
 
     @Bean

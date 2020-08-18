@@ -11,7 +11,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
 
 @Configuration
-@Order(2)
 @EnableWebSecurity
 class WebSecurityConfig(
     val authUserService: AuthUserService

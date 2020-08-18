@@ -21,11 +21,6 @@ spring:
 kafka:
   hosts: localhost:9092
 
-security:
-  oauth2:
-    resource:
-      filter-order: 3
-
 oauth:
   client: kotlin-backend-app
   secret: abc123!@#

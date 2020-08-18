@@ -14,7 +14,6 @@ import org.springframework.security.oauth2.provider.token.TokenStore
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter
 
 @Configuration
-@Order(1)
 @EnableAuthorizationServer
 class AuthorizationServerConfig(
     val authenticationManager: AuthenticationManager,

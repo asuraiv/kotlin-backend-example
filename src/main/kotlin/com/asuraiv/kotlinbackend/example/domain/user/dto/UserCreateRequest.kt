@@ -1,6 +1,7 @@
 package com.asuraiv.kotlinbackend.example.domain.user.dto
 
-data class UserDto(
+class UserCreateRequest(
     val username: String,
-    val email: String = ""
+    val password: String,
+    val email: String
 )
