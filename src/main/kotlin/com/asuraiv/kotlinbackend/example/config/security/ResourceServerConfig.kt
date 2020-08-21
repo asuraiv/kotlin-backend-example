@@ -3,7 +3,7 @@ package com.asuraiv.kotlinbackend.example.config.security
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Primary
-import org.springframework.core.annotation.Order
+import org.springframework.core.io.ClassPathResource
 import org.springframework.http.HttpMethod
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
@@ -13,6 +13,8 @@ import org.springframework.security.oauth2.provider.ClientDetailsService
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore
+import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFactory
+import java.io.IOException
 
 @Configuration
 @EnableResourceServer
@@ -52,11 +54,20 @@ class ResourceServerConfig(
     @Primary
     @Bean
     fun tokenStore(): JwtTokenStore {
-        return JwtTokenStore(JwtAccessTokenConverter())
+        return JwtTokenStore(tokenConverter())
     }
 
+    @Primary
     @Bean
     fun tokenConverter(): JwtAccessTokenConverter {
-        return JwtAccessTokenConverter()
+        val converter = JwtAccessTokenConverter()
+        try {
+            val keyFactory = KeyStoreKeyFactory(ClassPathResource("server.jks"), "changeme".toCharArray())
+            val keyPair = keyFactory.getKeyPair("example_auth", "changeme".toCharArray())
+            converter.setKeyPair(keyPair)
+            return converter
+        } catch (e: IOException) {
+            throw SecurityException("Error occur during create token converter", e)
+        }
     }
 }
