@@ -4,6 +4,8 @@ import com.asuraiv.kotlinbackend.example.domain.user.dto.UserCreateRequest
 import com.asuraiv.kotlinbackend.example.domain.user.dto.UserSearchResult
 import com.asuraiv.kotlinbackend.example.domain.user.entity.User
 import com.asuraiv.kotlinbackend.example.domain.user.repository.UserRepository
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.springframework.security.crypto.bcrypt.BCrypt
 import org.springframework.stereotype.Service
 
@@ -11,6 +13,15 @@ import org.springframework.stereotype.Service
 class UserService(
     val userRepository: UserRepository
 ) {
+
+    val log: Logger = LoggerFactory.getLogger(UserService::class.java)
+
+    fun deleteUser(username: String) {
+
+        userRepository.deleteById(username)
+
+        log.info("Delete user complete. username: $username")
+    }
 
     fun createUser(request: UserCreateRequest) {
 
