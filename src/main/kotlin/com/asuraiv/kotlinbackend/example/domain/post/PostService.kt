@@ -6,6 +6,7 @@ import com.asuraiv.kotlinbackend.example.domain.post.vo.Post
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
+import java.lang.RuntimeException
 
 @Service
 class PostService(
@@ -22,5 +23,14 @@ class PostService(
 
         postMapper.insertPost(post)
         log.info("Create post. id: ${post.id}, title: ${post.title}, writer: ${post.writer}")
+    }
+
+    fun getPost(id: Long?): Post {
+
+        id ?: throw RuntimeException("Post 'id' is required.")
+
+        val foundOne = postMapper.findPostById(id)
+
+        return foundOne
     }
 }

@@ -9,4 +9,5 @@ import org.springframework.stereotype.Repository
 interface PostMapper {
 
     fun insertPost(post: Post)
+    fun findPostById(id: Long): Post
 }
