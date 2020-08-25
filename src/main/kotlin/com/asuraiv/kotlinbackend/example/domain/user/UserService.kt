@@ -1,7 +1,9 @@
 package com.asuraiv.kotlinbackend.example.domain.user
 
+import com.asuraiv.kotlinbackend.example.domain.user.constant.UserType
 import com.asuraiv.kotlinbackend.example.domain.user.dto.UserCreateRequest
 import com.asuraiv.kotlinbackend.example.domain.user.dto.UserSearchResult
+import com.asuraiv.kotlinbackend.example.domain.user.entity.Person
 import com.asuraiv.kotlinbackend.example.domain.user.entity.User
 import com.asuraiv.kotlinbackend.example.domain.user.repository.UserRepository
 import org.slf4j.Logger
@@ -25,13 +27,15 @@ class UserService(
 
     fun createUser(request: UserCreateRequest) {
 
-        val user = User(
-            userName = request.username,
-            password = BCrypt.hashpw(request.password, BCrypt.gensalt()),
-            email = request.email
-        )
+        val person = Person()
+        person.userName = request.username
+        person.password = BCrypt.hashpw(request.password, BCrypt.gensalt())
+        person.userType = UserType.PERSON
+        person.address = request.address
+        person.email = request.email
+        person.phone = request.phone
 
-        userRepository.save(user)
+        userRepository.save(person)
     }
 
     fun getUser(username: String): UserSearchResult {
@@ -40,9 +44,18 @@ class UserService(
 
         user ?: throw RuntimeException("Not exist user. name: $username")
 
-        return UserSearchResult(
-            username = user.userName,
-            email = user.email
-        )
+        return when(user.userType) {
+            UserType.PERSON -> {
+                val person = user as Person
+                UserSearchResult(
+                    username = person.userName,
+                    userType = person.userType,
+                    address = person.address,
+                    email = person.email,
+                    phone = person.phone
+                )
+            }
+            else -> throw RuntimeException("Not supported user type. ${user.userType}")
+        }
     }
 }

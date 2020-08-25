@@ -9,8 +9,8 @@ spring:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     properties:
       hibernate:
-        show_sql: false
-        format_sql: false
+        show_sql: true
+        format_sql: true
     hibernate:
       naming:
         # MySQL physical 테이블의 필드 이름이 camel case 인 경우. 해당 이름에 맞게 매핑 (기본적으로 '_' 컨벤션으로 변환하여 매핑시켜주므로)

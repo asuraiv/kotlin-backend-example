@@ -17,12 +17,12 @@ class UserRepositoryTest {
     @Autowired
     lateinit var userRepository: UserRepository
 
-    @Test
-    @Transactional
-    fun testCreate() {
-
-        val user = User(userName = "asuraiv", password = "1234", email = "asuraiv@myemail.com")
-
-        userRepository.save(user)
-    }
+//    @Test
+//    @Transactional
+//    fun testCreate() {
+//
+//        val user = User(userName = "asuraiv", password = "1234", email = "asuraiv@myemail.com")
+//
+//        userRepository.save(user)
+//    }
 }

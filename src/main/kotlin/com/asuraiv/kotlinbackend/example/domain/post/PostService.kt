@@ -29,8 +29,6 @@ class PostService(
 
         id ?: throw RuntimeException("Post 'id' is required.")
 
-        val foundOne = postMapper.findPostById(id)
-
-        return foundOne
+        return postMapper.findPostById(id)
     }
 }

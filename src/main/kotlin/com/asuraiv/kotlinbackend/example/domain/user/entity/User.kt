@@ -1,20 +1,22 @@
 package com.asuraiv.kotlinbackend.example.domain.user.entity
 
-import javax.persistence.Column
-import javax.persistence.Entity
-import javax.persistence.Id
-import javax.persistence.Table
+import com.asuraiv.kotlinbackend.example.domain.user.constant.UserType
+import javax.persistence.*
 
 @Entity
 @Table(name = "user", catalog = "example")
-data class User(
+@DiscriminatorColumn(name = "userType")
+@Inheritance(strategy = InheritanceType.JOINED)
+open class User {
+
     @Id
     @Column(name = "username")
-    val userName: String,
+    lateinit var userName: String
 
     @Column(name = "password")
-    val password: String,
+    lateinit var password: String
 
-    @Column(name = "email")
-    val email: String
-)
+    @Column(name = "userType")
+    @Enumerated(EnumType.STRING)
+    lateinit var userType: UserType
+}
