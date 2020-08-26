@@ -1,7 +1,6 @@
 package com.asuraiv.kotlinbackend.example.controller
 
 import com.asuraiv.kotlinbackend.example.domain.user.UserService
-import com.asuraiv.kotlinbackend.example.domain.user.constant.UserRole
 import com.asuraiv.kotlinbackend.example.domain.user.dto.UserCreateRequest
 import com.asuraiv.kotlinbackend.example.domain.user.dto.UserSearchResult
 import org.springframework.web.bind.annotation.*
@@ -13,7 +12,7 @@ class UserController(
 ) {
     @PostMapping("/users")
     fun createUser(@RequestBody request: UserCreateRequest) {
-        userService.createUser(request)
+        userService.createPerson(request)
     }
 
     @GetMapping("/users/{username}")

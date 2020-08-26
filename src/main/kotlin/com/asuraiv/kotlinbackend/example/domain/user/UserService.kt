@@ -25,12 +25,11 @@ class UserService(
         log.info("Delete user complete. username: $username")
     }
 
-    fun createUser(request: UserCreateRequest) {
+    fun createPerson(request: UserCreateRequest) {
 
         val person = Person()
         person.userName = request.username
         person.password = BCrypt.hashpw(request.password, BCrypt.gensalt())
-        person.userType = UserType.PERSON
         person.address = request.address
         person.email = request.email
         person.phone = request.phone
@@ -44,18 +43,17 @@ class UserService(
 
         user ?: throw RuntimeException("Not exist user. name: $username")
 
-        return when(user.userType) {
-            UserType.PERSON -> {
-                val person = user as Person
+        return when(user) {
+            is Person -> {
                 UserSearchResult(
-                    username = person.userName,
-                    userType = person.userType,
-                    address = person.address,
-                    email = person.email,
-                    phone = person.phone
+                    username = user.userName,
+                    userType = UserType.PERSON,
+                    address = user.address,
+                    email = user.email,
+                    phone = user.phone
                 )
             }
-            else -> throw RuntimeException("Not supported user type. ${user.userType}")
+            else -> throw RuntimeException("Not supported user type. ${user.javaClass.name}")
         }
     }
 }
