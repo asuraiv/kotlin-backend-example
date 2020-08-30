@@ -14,4 +14,19 @@
 		VALUES (#{title}, #{content}, #{writer}, #{createdAt}, #{modifiedAt})
     </insert>
 
+	<select id="findPostList" parameterType="com.asuraiv.kotlinbackend.example.domain.post.dto.PostRequest"
+			resultMap="com.asuraiv.kotlinbackend.example.domain.post.vo.Post">
+		SELECT *
+		FROM post
+		<where>
+			<if test="request.searchKey != null and request.searchType == 'title'">
+				AND title LIKE CONCAT('%', #{request.searchKey}, '%')
+			</if>
+			<if test="request.searchKey != null and request.searchType == 'content'">
+				AND content LIKE CONCAT('%', #{request.searchKey}, '%')
+			</if>
+		</where>
+		LIMIT #{request.page}, #{request.size}
+	</select>
+
 </mapper>

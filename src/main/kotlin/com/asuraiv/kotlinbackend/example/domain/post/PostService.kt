@@ -1,10 +1,12 @@
 package com.asuraiv.kotlinbackend.example.domain.post
 
 import com.asuraiv.kotlinbackend.example.domain.post.dto.PostCreateRequest
+import com.asuraiv.kotlinbackend.example.domain.post.dto.PostRequest
 import com.asuraiv.kotlinbackend.example.domain.post.mapper.PostMapper
 import com.asuraiv.kotlinbackend.example.domain.post.vo.Post
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import org.springframework.data.domain.PageRequest
 import org.springframework.stereotype.Service
 import java.lang.RuntimeException
 
@@ -30,5 +32,12 @@ class PostService(
         id ?: throw RuntimeException("Post 'id' is required.")
 
         return postMapper.findPostById(id)
+    }
+
+    fun getPostList(request: PostRequest): List<Post> {
+
+        request.validate()
+
+        return postMapper.findPostList(request)
     }
 }
