@@ -4,7 +4,6 @@ import com.asuraiv.kotlinbackend.example.domain.user.constant.UserType
 import com.asuraiv.kotlinbackend.example.domain.user.dto.UserCreateRequest
 import com.asuraiv.kotlinbackend.example.domain.user.dto.UserSearchResult
 import com.asuraiv.kotlinbackend.example.domain.user.entity.Person
-import com.asuraiv.kotlinbackend.example.domain.user.entity.User
 import com.asuraiv.kotlinbackend.example.domain.user.repository.UserRepository
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -27,12 +26,13 @@ class UserService(
 
     fun createPerson(request: UserCreateRequest) {
 
-        val person = Person()
-        person.userName = request.username
-        person.password = BCrypt.hashpw(request.password, BCrypt.gensalt())
-        person.address = request.address
-        person.email = request.email
-        person.phone = request.phone
+        val person = Person().apply {
+            userName = request.userName
+            password = BCrypt.hashpw(request.password, BCrypt.gensalt())
+            address = request.address
+            email = request.email
+            phone = request.phone
+        }
 
         userRepository.save(person)
     }
@@ -45,13 +45,14 @@ class UserService(
 
         return when(user) {
             is Person -> {
-                UserSearchResult(
-                    username = user.userName,
-                    userType = UserType.PERSON,
-                    address = user.address,
-                    email = user.email,
+                UserSearchResult().apply {
+                    userName = user.userName
+                    userType = UserType.PERSON
+                    address = user.address
+                    email = user.email
                     phone = user.phone
-                )
+                }
+
             }
             else -> throw RuntimeException("Not supported user type. ${user.javaClass.name}")
         }

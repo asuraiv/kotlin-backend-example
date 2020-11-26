@@ -19,9 +19,11 @@ class PostService(
 
     fun createPost(request: PostCreateRequest) {
 
-        val post = Post(title = request.title,
-            content = request.content,
-            writer = request.writer)
+        val post = Post().apply {
+            title = request.title
+            content = request.content
+            writer = request.writer
+        }
 
         postMapper.insertPost(post)
         log.info("Create post. id: ${post.id}, title: ${post.title}, writer: ${post.writer}")
