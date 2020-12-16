@@ -51,13 +51,11 @@ class ResourceServerConfig(
         return tokenServices
     }
 
-    @Primary
     @Bean
     fun tokenStore(): JwtTokenStore {
         return JwtTokenStore(tokenConverter())
     }
 
-    @Primary
     @Bean
     fun tokenConverter(): JwtAccessTokenConverter {
         val converter = JwtAccessTokenConverter()

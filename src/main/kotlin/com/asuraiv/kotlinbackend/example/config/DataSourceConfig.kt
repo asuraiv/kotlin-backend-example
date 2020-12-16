@@ -28,9 +28,8 @@ import javax.sql.DataSource
 @EnableTransactionManagement
 class DataSourceConfig {
 
-    @Primary
     @Bean
-    @ConfigurationProperties("spring.datasource.sample")
+    @ConfigurationProperties("spring.datasource.example")
     fun dataSource(): DataSource {
 
         return DataSourceBuilder
@@ -39,7 +38,6 @@ class DataSourceConfig {
                 .build()
     }
 
-    @Primary
     @Bean
     fun sessionFactory(): SqlSessionFactory {
 

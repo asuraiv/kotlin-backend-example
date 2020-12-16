@@ -19,7 +19,6 @@ class KafkaConfig {
     @Value("\${kafka.hosts}")
     lateinit var hosts: String
 
-    @Primary
     @Bean
     fun kafkaListenerContainerFactory(): ConcurrentKafkaListenerContainerFactory<String, String> {
 
@@ -29,7 +28,6 @@ class KafkaConfig {
         return containerFactory
     }
 
-    @Primary
     @Bean
     fun consumerFactory(): ConsumerFactory<String, String>? {
 

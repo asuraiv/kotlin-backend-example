@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    example:
+      driver-class-name: org.h2.Driver
+      jdbc-url: jdbc:h2:mem:example;DB_CLOSE_ON_EXIT=FALSE;MODE=MySQL;INIT=CREATE SCHEMA IF NOT EXISTS example
+      username: sa
+      password:
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+    hibernate:
+      naming:
+        # MySQL physical 테이블의 필드 이름이 camel case 인 경우. 해당 이름에 맞게 매핑 (기본적으로 '_' 컨벤션으로 변환하여 매핑시켜주므로)
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
